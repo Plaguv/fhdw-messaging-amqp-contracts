@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.fhdw</groupId>
-    <artifactId>fhdw-messaging-amqp-contracts</artifactId>
+    <artifactId>messaging-amqp-contracts</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -32,7 +32,8 @@
     <distributionManagement>
         <repository>
             <id>github</id>
-            <url>https://maven.pkg.github.com/Plaguv/fhdw-messaging-amqp-contracts</url>
+            <name>GitHub Plaguv Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/Plaguv/messaging-amqp-contracts</url>
         </repository>
     </distributionManagement>
 </project>

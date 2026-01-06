@@ -1,23 +1,28 @@
 name: Publish Contracts
+
 on:
   push:
     branches: [ "main" ]
+
 jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
+
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK and Maven auth
+
+      - name: Set up JDK and Maven authentication
         uses: actions/setup-java@v4
         with:
           java-version: '25'
           distribution: 'temurin'
           cache: maven
           server-id: github
-          server-username: GITHUB_ACTOR
-          server-password: ${{ secrets.PPKG_TOKEN }}
-      - name: Publish to GitHub Packages
+          server-username: Plaguv
+          server-password: ${{ secrets.GH_PERSONAL_TOKEN }}
+
+      - name: Deploy to GitHub Packages
         run: mvn deploy
