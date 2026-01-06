@@ -1,4 +1,4 @@
-package de.fhdw.contracts.common;
+package com.github.Plaguv.fhdw.messaging.amqp.contracts.common;
 
 public record EventVersion (
         int major,
