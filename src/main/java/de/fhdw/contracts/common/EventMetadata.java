@@ -1,4 +1,4 @@
-package com.github.Plaguv.fhdw.messaging.amqp.contracts.common;
+package de.fhdw.contracts.common;
 
 import java.time.Instant;
 import java.util.UUID;

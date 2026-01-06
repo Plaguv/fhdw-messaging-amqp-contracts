@@ -1,6 +1,6 @@
-package com.github.Plaguv.fhdw.messaging.amqp.contracts.event.procurement;
+package de.fhdw.contracts.event.procurement;
 
-import com.github.Plaguv.fhdw.messaging.amqp.contracts.common.EventMetadata;
+import de.fhdw.contracts.common.EventMetadata;
 
 import java.util.UUID;
 
