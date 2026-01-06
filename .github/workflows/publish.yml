@@ -18,6 +18,6 @@ jobs:
           cache: maven
           server-id: github
           server-username: GITHUB_ACTOR
-          server-password: GITHUB_TOKEN
+          server-password: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish to GitHub Packages
         run: mvn deploy
