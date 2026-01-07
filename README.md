@@ -1,4 +1,4 @@
-# FHDW Messaging AMQP Contracts
+# Messaging AMQP Contracts
 
 ## Overview
 
