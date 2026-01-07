@@ -4,11 +4,11 @@
 
     <groupId>de.fhdw</groupId>
     <artifactId>messaging-amqp-contracts</artifactId>
-    <version>1.0.0</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>FHDW Messaging AMQP Contracts</name>
-    <description>Messaging Contracts designed for AMQP and the projects for HFW423 at FHDW</description>
+    <name>Messaging AMQP Contracts</name>
+    <description>Messaging Contracts designed for Spring Boots AMQP</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,12 +28,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>Plaguv</name>
-            <url>https://maven.pkg.github.com/Plaguv/messaging-amqp-contracts</url>
-        </repository>
-    </distributionManagement>
 </project>
