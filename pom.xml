@@ -33,7 +33,7 @@
         <repository>
             <id>github</id>
             <name>Github Packages</name>
-            <url>https://maven.pkg.github.com/Plaguv/messaging-amqp-starter</url>
+            <url>https://maven.pkg.github.com/Plaguv/messaging-amqp-contracts</url>
         </repository>
         <snapshotRepository>
             <id>github</id>
