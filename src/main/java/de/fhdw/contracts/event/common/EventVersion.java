@@ -1,4 +1,4 @@
-package de.fhdw.contracts.common;
+package de.fhdw.contracts.event.common;
 
 public record EventVersion (
         int major,

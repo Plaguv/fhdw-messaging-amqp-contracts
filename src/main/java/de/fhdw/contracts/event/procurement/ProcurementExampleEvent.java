@@ -1,6 +1,6 @@
 package de.fhdw.contracts.event.procurement;
 
-import de.fhdw.contracts.common.EventMetadata;
+import de.fhdw.contracts.event.common.EventMetadata;
 
 import java.util.UUID;
 

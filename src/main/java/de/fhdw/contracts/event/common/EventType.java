@@ -1,4 +1,4 @@
-package de.fhdw.contracts.common;
+package de.fhdw.contracts.event.common;
 
 public enum EventType {
     // Store
@@ -12,5 +12,9 @@ public enum EventType {
     // Payment
     PAYMENT_REQUESTED,
     PAYMENT_CONFIRMED,
-    PAYMENT_FAILED
+    PAYMENT_FAILED;
+
+    public String routingKey() {
+        return name().toLowerCase().replaceAll("_", ".");
+    }
 }
