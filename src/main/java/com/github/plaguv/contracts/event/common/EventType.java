@@ -1,15 +1,15 @@
-package de.fhdw.contracts.event.common;
+package com.github.plaguv.contracts.event.common;
 
 public enum EventType {
-    // Store
+    // Store related events
     STORE_CREATED,
     STORE_UPDATED,
 
-    // Cashier
+    // Cashier related events
     CASHIER_ASSIGNED,
     CASHIER_REMOVED,
 
-    // Payment
+    // Payment related events
     PAYMENT_REQUESTED,
     PAYMENT_CONFIRMED,
     PAYMENT_FAILED;

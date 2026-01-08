@@ -1,6 +1,6 @@
-package de.fhdw.contracts.event.logistic;
+package com.github.plaguv.contracts.event.logistic;
 
-import de.fhdw.contracts.event.common.EventMetadata;
+import com.github.plaguv.contracts.event.common.EventMetadata;
 
 import java.util.UUID;
 
