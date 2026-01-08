@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <name>Messaging AMQP Contracts</name>
-    <description>Messaging Contracts designed for Spring Boots AMQP</description>
+    <description>A module designed for defining the domain-specific contracts used in an AMQP messaging service</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,17 +28,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>Github Packages</name>
-            <url>https://maven.pkg.github.com/Plaguv/messaging-amqp-contracts</url>
-        </repository>
-        <snapshotRepository>
-            <id>github</id>
-            <name>GitHub Packages Snapshots</name>
-            <url>https://maven.pkg.github.com/Plaguv/messaging-amqp-contracts</url>
-        </snapshotRepository>
-    </distributionManagement>
 </project>
