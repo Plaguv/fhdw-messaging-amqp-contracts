@@ -1,14 +1,27 @@
 package com.github.plaguv.contracts.event.logistic;
 
+import com.github.plaguv.contracts.event.AbstractDomainEvent;
 import com.github.plaguv.contracts.event.common.EventMetadata;
-
-import java.util.UUID;
 
 /**
  * Example Message for Logistic System
  */
-public record LogisticExampleEvent(
-        EventMetadata metadata,
-        UUID logisticHallId,
-        String logisticHallName
-) {}
+public class LogisticExampleEvent extends AbstractDomainEvent {
+
+    private final Long logisticHallId;
+    private final String logisticHallName;
+
+    public LogisticExampleEvent(EventMetadata eventMetadata, Long logisticHallId, String logisticHallName) {
+        super(eventMetadata);
+        this.logisticHallId = logisticHallId;
+        this.logisticHallName = logisticHallName;
+    }
+
+    public Long getLogisticHallId() {
+        return logisticHallId;
+    }
+
+    public String getLogisticHallName() {
+        return logisticHallName;
+    }
+}
