@@ -13,7 +13,7 @@ It includes:
 Its main use-case is found in this custom [Spring Boot AMQP Starter](https://github.com/plaguv/messaging-amqp-starter)
 
 # Dependencies
-- `Java LTS >= 16`
+- `Java LTS >= 17`
 
 # Installation
 You can easily add the `fhdw.de:messaging-amqp-contracts` library to your project using **JitPack**.
