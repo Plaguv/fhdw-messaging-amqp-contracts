@@ -1,6 +1,5 @@
-package event.common;
+package com.github.plaguv.contracts.event.common;
 
-import com.github.plaguv.contracts.event.common.EventVersion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
