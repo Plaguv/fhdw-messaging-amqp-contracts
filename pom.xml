@@ -64,4 +64,12 @@
             </plugin>
         </plugins>
     </build>
+
+  <distributionManagement>
+    <repository>
+      <id>ossrh</id>
+      <name>Central Repository OSSRH</name>
+      <url>https://ossrh-staging-api.central.sonatype.com</url>
+    </repository>
+  </distributionManagement>      
 </project>
