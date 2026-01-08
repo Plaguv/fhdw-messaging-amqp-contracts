@@ -10,6 +10,11 @@
     <name>Messaging AMQP Contracts</name>
     <description>A module designed for defining the domain-specific contracts used in an AMQP messaging service</description>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -18,7 +23,6 @@
                 <version>3.14.1</version>
                 <configuration>
                     <release>16</release>
-                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
         </plugins>
