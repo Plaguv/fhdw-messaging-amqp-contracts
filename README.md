@@ -1,5 +1,3 @@
-[![](https://jitpack.io/v/plaguv/messaging-amqp-contracts.svg)](https://jitpack.io/#plaguv/messaging-amqp-contracts)
-
 # Messaging AMQP Contracts
 
 This module defines the **shared contracts** for messages exchanged between applications. 
@@ -16,6 +14,13 @@ Its main use-case is found in this custom [Spring Boot AMQP Starter](https://git
 - `Java LTS >= 17`
 
 # Installation
-You can easily add the `fhdw.de:messaging-amqp-contracts` library to your project using **JitPack**.
+You can easily add the `io.github.plaguv:messaging-amqp-contracts` library to 
+your project using the **Maven Central Repository**.
 
-An additional guide on how to do that is featured [here](https://jitpack.io/#plaguv/messaging-amqp-contracts/Tag).
+```xml
+<dependency>
+    <groupId>io.github.plaguv</groupId>
+    <artifactId>messaging-amqp-contracts</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
