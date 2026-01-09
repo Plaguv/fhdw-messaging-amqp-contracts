@@ -1,3 +1,5 @@
+![Apache](https://img.shields.io/badge/apache-%23D42029.svg?style=for-the-badge&logo=apache&logoColor=white)
+
 # Messaging AMQP Contracts
 
 This module defines the **shared contracts** for messages exchanged between applications. 
@@ -16,6 +18,9 @@ Its main use-case is found in this custom [Spring Boot AMQP Starter](https://git
 # Installation
 You can easily add the `io.github.plaguv:messaging-amqp-contracts` library to 
 your project using the **Maven Central Repository**.
+
+> At the time of release the libarary might **still be private** and therefore not publically available.
+> In that case, check out the repository yourself and run `mvn clean install`.
 
 ```xml
 <dependency>
