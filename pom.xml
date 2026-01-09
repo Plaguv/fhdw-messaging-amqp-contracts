@@ -8,7 +8,8 @@
     <packaging>jar</packaging>
 
     <name>Messaging AMQP Contracts</name>
-    <description>A module designed for defining the domain-specific contracts used in an AMQP messaging service
+    <description>
+        A module designed for defining the domain-specific contracts used in an AMQP messaging service.
     </description>
     <url>https://github.com/plaguv/messaging-amqp-contracts</url>
 
@@ -91,7 +92,6 @@
             <id>release</id>
             <build>
                 <plugins>
-
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
