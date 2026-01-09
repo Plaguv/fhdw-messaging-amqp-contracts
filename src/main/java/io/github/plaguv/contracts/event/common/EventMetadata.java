@@ -1,4 +1,4 @@
-package com.github.plaguv.contracts.event.common;
+package io.github.plaguv.contracts.event.common;
 
 import java.time.Instant;
 import java.util.UUID;

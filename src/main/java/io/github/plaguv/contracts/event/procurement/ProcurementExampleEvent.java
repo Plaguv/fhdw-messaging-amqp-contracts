@@ -1,7 +1,7 @@
-package com.github.plaguv.contracts.event.procurement;
+package io.github.plaguv.contracts.event.procurement;
 
-import com.github.plaguv.contracts.event.AbstractDomainEvent;
-import com.github.plaguv.contracts.event.common.EventMetadata;
+import io.github.plaguv.contracts.event.AbstractDomainEvent;
+import io.github.plaguv.contracts.event.common.EventMetadata;
 
 /**
  * Example Message for Procurement System

@@ -2,13 +2,35 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.plaguv</groupId>
+    <groupId>io.github.plaguv</groupId>
     <artifactId>messaging-amqp-contracts</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-alpha-1</version>
     <packaging>jar</packaging>
 
     <name>Messaging AMQP Contracts</name>
     <description>A module designed for defining the domain-specific contracts used in an AMQP messaging service</description>
+    <url>https://github.com/plaguv/messaging-amqp-contracts</url>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:https://github.com/plaguv/messaging-amqp-contracts.git</connection>
+        <developerConnection>scm:git:ssh://github.com/plaguv/messaging-amqp-contracts.git</developerConnection>
+        <url>https://github.com/plaguv/messaging-amqp-contracts</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>plaguv</id>
+            <name>Erik</name>
+            <url>https://github.com/plaguv</url>
+        </developer>
+    </developers>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -62,14 +84,16 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.9.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
-  <distributionManagement>
-    <repository>
-      <id>ossrh</id>
-      <name>Central Repository OSSRH</name>
-      <url>https://ossrh-staging-api.central.sonatype.com</url>
-    </repository>
-  </distributionManagement>      
 </project>

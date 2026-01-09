@@ -1,7 +1,7 @@
-package com.github.plaguv.contracts.event.logistic;
+package io.github.plaguv.contracts.event.logistic;
 
-import com.github.plaguv.contracts.event.AbstractDomainEvent;
-import com.github.plaguv.contracts.event.common.EventMetadata;
+import io.github.plaguv.contracts.event.AbstractDomainEvent;
+import io.github.plaguv.contracts.event.common.EventMetadata;
 
 /**
  * Example Message for Logistic System

@@ -1,7 +1,7 @@
-package com.github.plaguv.contracts.event;
+package io.github.plaguv.contracts.event;
 
-import com.github.plaguv.contracts.event.common.EventMetadata;
-import com.github.plaguv.contracts.event.common.EventScope;
+import io.github.plaguv.contracts.event.common.EventMetadata;
+import io.github.plaguv.contracts.event.common.EventScope;
 
 public abstract class AbstractDomainEvent implements DomainEvent {
 

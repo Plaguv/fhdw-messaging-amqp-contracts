@@ -1,7 +1,7 @@
-package com.github.plaguv.contracts.event.store;
+package io.github.plaguv.contracts.event.store;
 
-import com.github.plaguv.contracts.event.AbstractDomainEvent;
-import com.github.plaguv.contracts.event.common.EventMetadata;
+import io.github.plaguv.contracts.event.AbstractDomainEvent;
+import io.github.plaguv.contracts.event.common.EventMetadata;
 
 /**
  * Example Message for Store System
