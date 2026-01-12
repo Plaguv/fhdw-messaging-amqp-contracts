@@ -1,4 +1,4 @@
-package io.github.plaguv.contracts.event.common;
+package io.github.plaguv.contracts.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ class EventMetadataTest {
     @DisplayName("Constructor should reject null arguments")
     void constructorRejectsNullArguments() {
         UUID eventId = UUID.randomUUID();
-        EventType eventType = EventType.CASHIER_ASSIGNED;
+        EventType eventType = EventType.STORE_OPENED;
         EventVersion eventVersion = EventVersion.of(1);
         EventScope eventScope = EventScope.INTERNAL;
         Instant occurredAt = Instant.now();
@@ -60,7 +60,7 @@ class EventMetadataTest {
     @DisplayName("Constructor initializes fields with given arguments")
     void constructorInitializesFields() {
         UUID eventId = UUID.randomUUID();
-        EventType eventType = EventType.CASHIER_ASSIGNED;
+        EventType eventType = EventType.STORE_OPENED;
         EventVersion eventVersion = EventVersion.of(1);
         EventScope eventScope = EventScope.INTERNAL;
         Instant occurredAt = Instant.now();
@@ -80,7 +80,7 @@ class EventMetadataTest {
     @DisplayName("Constructor initializes fields with a builder as an argument")
     void constructorAcceptsBuilder() {
         UUID eventId = UUID.randomUUID();
-        EventType eventType = EventType.CASHIER_ASSIGNED;
+        EventType eventType = EventType.STORE_OPENED;
         EventVersion eventVersion = EventVersion.of(1);
         EventScope eventScope = EventScope.INTERNAL;
         Instant occurredAt = Instant.now();
@@ -108,7 +108,7 @@ class EventMetadataTest {
     @DisplayName("Builder initializes fields with default values if not given")
     void builderInitializesDefaults() {
         EventMetadata eventMetadata = EventMetadata.builder()
-                .withEventType(EventType.CASHIER_ASSIGNED)
+                .withEventType(EventType.STORE_OPENED)
                 .withEventVersion(EventVersion.of(1))
                 .withEventScope(EventScope.INTERNAL)
                 .withProducer(Object.class)
@@ -123,7 +123,7 @@ class EventMetadataTest {
     @DisplayName("Builder initializes fields with given arguments")
     void builderInitializesFields() {
         UUID eventId = UUID.randomUUID();
-        EventType eventType = EventType.CASHIER_ASSIGNED;
+        EventType eventType = EventType.STORE_OPENED;
         EventVersion eventVersion = EventVersion.of(1);
         EventScope eventScope = EventScope.INTERNAL;
         Instant occurredAt = Instant.now();

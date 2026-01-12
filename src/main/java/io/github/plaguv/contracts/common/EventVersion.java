@@ -1,4 +1,4 @@
-package io.github.plaguv.contracts.event.common;
+package io.github.plaguv.contracts.common;
 
 public record EventVersion(
         int major,

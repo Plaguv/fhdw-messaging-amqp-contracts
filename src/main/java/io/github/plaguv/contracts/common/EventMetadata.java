@@ -1,4 +1,4 @@
-package io.github.plaguv.contracts.event.common;
+package io.github.plaguv.contracts.common;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -9,8 +9,8 @@ public record EventMetadata(
         EventVersion eventVersion,
         EventScope eventScope,
         Instant occurredAt,
-        Class<?> producer)
-{
+        Class<?> producer
+) {
     public EventMetadata {
         if (eventId == null) {
             throw new IllegalArgumentException("EventId cannot be null");
@@ -85,13 +85,13 @@ public record EventMetadata(
 
     @Override
     public String toString() {
-        return "EventMetadata{" +
-                "eventId=" + eventId +
-                ", eventType=" + eventType +
-                ", eventVersion=" + eventVersion +
-                ", eventScope=" + eventScope +
-                ", occurredAt=" + occurredAt +
-                ", producer=" + producer +
-                '}';
+        return "metadata={eventId=%s,eventType=%s,eventVersion=%s,eventScope=%s,occurredAt=%s,producer=%s}".formatted(
+                eventId,
+                eventType,
+                eventVersion,
+                eventScope,
+                occurredAt,
+                producer
+        );
     }
 }
