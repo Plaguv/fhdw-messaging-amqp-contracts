@@ -3,10 +3,10 @@ package io.github.plaguv.contracts.common;
 import io.github.plaguv.contracts.common.metadata.EventMetadata;
 import io.github.plaguv.contracts.common.routing.EventRouting;
 
-public record EventEnvelope<T extends EventInstance>(
+public record EventEnvelope (
     EventMetadata metadata,
     EventRouting routing,
-    T payload
+    EventInstance payload
 ) {
     public EventEnvelope {
         if (metadata == null) {

@@ -26,12 +26,12 @@ class EventEnvelopeTest {
         EventInstance eventInstance = new StoreClosedEventInstance(5L);
 
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new EventEnvelope<>(null, null, null));
+                () -> new EventEnvelope(null, null, null));
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new EventEnvelope<>(eventMetadata, eventRouting, null));
+                () -> new EventEnvelope(eventMetadata, eventRouting, null));
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new EventEnvelope<>(eventMetadata, null, eventInstance));
+                () -> new EventEnvelope(eventMetadata, null, eventInstance));
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new EventEnvelope<>(null, eventRouting, eventInstance));
+                () -> new EventEnvelope(null, eventRouting, eventInstance));
     }
 }
