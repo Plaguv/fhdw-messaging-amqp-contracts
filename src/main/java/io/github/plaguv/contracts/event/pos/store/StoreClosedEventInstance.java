@@ -1,11 +1,11 @@
 package io.github.plaguv.contracts.event.pos.store;
 
-import io.github.plaguv.contracts.DomainEvent;
+import io.github.plaguv.contracts.common.EventInstance;
 
-public record StoreClosedEvent (
+public record StoreClosedEventInstance(
         Long storeId
-) implements DomainEvent {
-    public StoreClosedEvent {
+) implements EventInstance {
+    public StoreClosedEventInstance {
         if (storeId == null) {
             throw new IllegalArgumentException("StoreClosedEvents storeId cannot be null");
         }

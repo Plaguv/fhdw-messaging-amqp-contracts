@@ -1,4 +1,4 @@
-package io.github.plaguv.contracts.common;
+package io.github.plaguv.contracts.common.metadata;
 
 public record EventVersion(
         int major,
@@ -7,13 +7,13 @@ public record EventVersion(
 ) {
     public EventVersion {
         if (major < 0) {
-            throw new IllegalArgumentException("Major version cannot be negative, was '%d'".formatted(major));
+            throw new IllegalArgumentException("EventVersion 'major' cannot be negative, was '%d'".formatted(major));
         }
         if (minor < 0) {
-            throw new IllegalArgumentException("Minor version cannot be negative, was '%d'".formatted(minor));
+            throw new IllegalArgumentException("EventVersion 'minor' cannot be negative, was '%d'".formatted(minor));
         }
         if (patch < 0) {
-            throw new IllegalArgumentException("Patch version cannot be negative, was '%d'".formatted(patch));
+            throw new IllegalArgumentException("EventVersion 'patch' cannot be negative, was '%d'".formatted(patch));
         }
     }
 

@@ -1,8 +1,8 @@
-package io.github.plaguv.contracts.common;
+package io.github.plaguv.contracts.common.routing;
 
-import io.github.plaguv.contracts.DomainEvent;
-import io.github.plaguv.contracts.event.pos.store.StoreClosedEvent;
-import io.github.plaguv.contracts.event.pos.store.StoreOpenedEvent;
+import io.github.plaguv.contracts.common.EventInstance;
+import io.github.plaguv.contracts.event.pos.store.StoreClosedEventInstance;
+import io.github.plaguv.contracts.event.pos.store.StoreOpenedEventInstance;
 
 import java.util.*;
 
@@ -15,16 +15,17 @@ public enum EventType {
      * Indicates that a store has been opened and is now operational.
      * Domain: {@link EventDomain#STORE}
      */
-    STORE_OPENED(EventDomain.STORE, StoreOpenedEvent.class),
+    STORE_OPENED(EventDomain.STORE, StoreOpenedEventInstance.class),
 
     /**
      * Indicates that a store has been closed.
      * Domain: {@link EventDomain#STORE}
      */
-    STORE_CLOSED(EventDomain.STORE, StoreClosedEvent.class);
+    STORE_CLOSED(EventDomain.STORE, StoreClosedEventInstance.class);
 
     private final EventDomain eventDomain;
-    private final Class<? extends DomainEvent> eventClass;
+    private final Class<? extends EventInstance> eventClass;
+    private final String routingKey;
 
     /**
      * Constructs a new event type definition.
@@ -32,9 +33,23 @@ public enum EventType {
      * @param eventDomain the logical domain this event belongs to
      * @param eventClass  the concrete event payload class associated with this type
      */
-    EventType(EventDomain eventDomain, Class<? extends DomainEvent> eventClass) {
+    EventType(EventDomain eventDomain, Class<? extends EventInstance> eventClass) {
         this.eventDomain = eventDomain;
         this.eventClass = eventClass;
+        this.routingKey = generateEventRoutingKey();
+    }
+
+    /**
+     * Constructs a new event type definition with a routingKey override.
+     *
+     * @param eventDomain the logical domain this event belongs to
+     * @param eventClass  the concrete event payload class associated with this type
+     * @param routingKey  the override routing key
+     */
+    EventType(EventDomain eventDomain, Class<? extends EventInstance> eventClass, String routingKey) {
+        this.eventDomain = eventDomain;
+        this.eventClass = eventClass;
+        this.routingKey = routingKey;
     }
 
     /**
@@ -42,7 +57,7 @@ public enum EventType {
      *
      * @return the event domain
      */
-    public EventDomain eventDomain() {
+    public EventDomain getEventDomain() {
         return eventDomain;
     }
 
@@ -52,8 +67,18 @@ public enum EventType {
      *
      * @return the event payload class
      */
-    public Class<? extends DomainEvent> eventClass() {
+    public Class<? extends EventInstance> getEventClass() {
         return eventClass;
+    }
+
+    /**
+     * Returns the concrete routing key associated with this event type.
+     * The routing key must be unique across all event types.
+     *
+     * @return the event routing key
+     */
+    public String getRoutingKey() {
+        return routingKey;
     }
 
     /**
@@ -62,7 +87,7 @@ public enum EventType {
      *
      * @return the routing key in dot-delimited lowercase format
      */
-    public String eventRoutingKey() {
+    private String generateEventRoutingKey() {
         String normalizedName = name().toLowerCase().replace("_", ".");
 
         if (normalizedName.startsWith(eventDomain.name().toLowerCase() + ".")) {
@@ -83,12 +108,12 @@ public enum EventType {
      */
     public static List<EventType> fromEventDomain(EventDomain eventDomain) {
         return Arrays.stream(EventType.values())
-                .filter(eventType -> eventType.eventDomain() == eventDomain)
+                .filter(eventType -> eventType.getEventDomain() == eventDomain)
                 .toList();
     }
 
     /**
-     * Returns the {@link EventType} associated with a given {@link DomainEvent} class.
+     * Returns the {@link EventType} associated with a given {@link EventInstance} class.
      * <p>
      * This method provides a way to map an event class to its corresponding enum value,
      * which can be useful for determining the domain, routing key, or other metadata dynamically.
@@ -96,19 +121,26 @@ public enum EventType {
      * @param eventClass the class of the event to look up
      * @return an {@link Optional} containing the matching {@link EventType} if found, or empty if no mapping exists
      */
-    public static Optional<EventType> fromEventClass(Class<? extends DomainEvent> eventClass) {
+    public static Optional<EventType> fromEventClass(Class<? extends EventInstance> eventClass) {
         return Arrays.stream(EventType.values())
-                .filter(eventType -> eventType.eventClass() == eventClass)
+                .filter(eventType -> eventType.getEventClass() == eventClass)
+                .findFirst();
+    }
+
+    public static Optional<EventType> fromRoutingKey(String routingKey) {
+        return Arrays.stream(EventType.values())
+                .filter(eventType -> eventType.getRoutingKey().equals(routingKey))
                 .findFirst();
     }
 
     /*
-     * --- Event Class uniqueness checks ---
+     * --- Validation checks ---
      */
+
     static {
         validateNotNull();
         validateUniqueEventClasses();
-        validateRoutingKeys();
+        validateUniqueRoutingKeys();
     }
 
     /**
@@ -116,23 +148,23 @@ public enum EventType {
      */
     private static void validateNotNull() {
         for (EventType eventType : EventType.values()) {
-            if (eventType.eventDomain() == null) {
+            if (eventType.getEventDomain() == null) {
                 throw new IllegalStateException("Null eventDomain registration detected for eventType: %s".formatted(eventType.name()));
             }
-            if (eventType.eventClass() == null) {
+            if (eventType.getEventClass() == null) {
                 throw new IllegalStateException("Null eventClass registration detected for eventType: %s".formatted(eventType.name()));
             }
         }
     }
 
     /**
-     * Validates that all enum values have a unique {@link DomainEvent} assigned as their {@code eventClass} attribute
+     * Validates that all enum values have a unique {@link EventInstance} assigned as their {@code eventClass} attribute
      */
     private static void validateUniqueEventClasses() {
         Map<Class<?>, EventType> seen = new HashMap<>();
 
         for (EventType type : EventType.values()) {
-            Class<?> eventClass = type.eventClass();
+            Class<?> eventClass = type.getEventClass();
 
             EventType existing = seen.putIfAbsent(eventClass, type);
             if (existing != null) {
@@ -152,16 +184,20 @@ public enum EventType {
     }
 
     /**
-     * Validates that all enum values have a unique {@code routing key}
+     * Validates that all enum values have a unique {@code routingKey}
      */
-    private static void validateRoutingKeys() {
+    private static void validateUniqueRoutingKeys() {
         Map<String, EventType> seen = new HashMap<>();
 
         for (EventType type : EventType.values()) {
-            String key = type.eventRoutingKey();
+            String key = type.getRoutingKey();
             EventType existing = seen.putIfAbsent(key, type);
             if (existing != null) {
-                throw new IllegalStateException("Duplicate routing key: %s used by %s and %s".formatted(key, existing, type));
+                throw new IllegalStateException("""
+                        Duplicate routing key: %s
+                        Used by %s and %s
+                        """
+                        .formatted(key, existing, type));
             }
         }
     }

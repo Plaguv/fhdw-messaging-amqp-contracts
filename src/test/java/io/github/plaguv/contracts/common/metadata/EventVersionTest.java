@@ -1,4 +1,4 @@
-package io.github.plaguv.contracts.common;
+package io.github.plaguv.contracts.common.metadata;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class EventVersionTest {
 
     @Test
-    @DisplayName("Constructor should reject negative major, minor, patch")
-    void constructorRejectsNegativeNumbers() {
+    @DisplayName("Constructor should reject negative numbers for major, minor and patch")
+    void throwsOnNegativeNumbers() {
         assertThrows(IllegalArgumentException.class, () -> new EventVersion(-1, 0, 0));
         assertThrows(IllegalArgumentException.class, () -> new EventVersion(0, -1, 0));
         assertThrows(IllegalArgumentException.class, () -> new EventVersion(0, 0, -1));
@@ -18,7 +18,7 @@ class EventVersionTest {
 
     @Test
     @DisplayName("Static 'of' methods should create correct versions")
-    void ofMethodsWork() {
+    void ofVersion() {
         EventVersion v1 = EventVersion.of(1);
         assertEquals(1, v1.major());
         assertEquals(0, v1.minor());
