@@ -12,17 +12,20 @@ class EventMetadataTest {
     @Test
     @DisplayName("Should throw if null parameter in constructor")
     void throwsOnNull() {
+        UUID uuid = UUID.randomUUID();
+        EventVersion eventVersion = new EventVersion(1);
+        Instant instant = Instant.now();
+        Class<?> producer = EventMetadataTest.class;
+
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> new EventMetadata(null, null, null, null));
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new EventMetadata(UUID.randomUUID(), EventVersion.of(1), Instant.now(), null));
+                () -> new EventMetadata(uuid, eventVersion, instant, null));
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new EventMetadata(UUID.randomUUID(), EventVersion.of(1), null, EventMetadataTest.class));
+                () -> new EventMetadata(uuid, eventVersion, null, producer));
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new EventMetadata(UUID.randomUUID(), null, Instant.now(), EventMetadataTest.class));
+                () -> new EventMetadata(uuid, null, instant, producer));
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new EventMetadata(null, EventVersion.of(1), Instant.now(), EventMetadataTest.class));
-
-        Assertions.assertThrows(IllegalArgumentException.class, () -> EventMetadata.builder().build());
+                () -> new EventMetadata(null, eventVersion, instant, producer));
     }
 }

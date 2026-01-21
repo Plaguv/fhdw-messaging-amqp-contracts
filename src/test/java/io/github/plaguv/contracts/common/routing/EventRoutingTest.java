@@ -15,7 +15,5 @@ class EventRoutingTest {
                 () -> new EventRouting(EventType.STORE_OPENED, null));
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> new EventRouting(null, EventDispatchType.DIRECT));
-
-        Assertions.assertThrows(IllegalArgumentException.class, () -> EventRouting.builder().build());
     }
 }

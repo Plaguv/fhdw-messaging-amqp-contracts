@@ -7,47 +7,22 @@ public record EventVersion(
 ) {
     public EventVersion {
         if (major < 0) {
-            throw new IllegalArgumentException("EventVersion 'major' cannot be negative, was '%d'".formatted(major));
+            throw new IllegalArgumentException("EventVersion attribute 'major' cannot be negative, was '%d'".formatted(major));
         }
         if (minor < 0) {
-            throw new IllegalArgumentException("EventVersion 'minor' cannot be negative, was '%d'".formatted(minor));
+            throw new IllegalArgumentException("EventVersion attribute 'minor' cannot be negative, was '%d'".formatted(minor));
         }
         if (patch < 0) {
-            throw new IllegalArgumentException("EventVersion 'patch' cannot be negative, was '%d'".formatted(patch));
+            throw new IllegalArgumentException("EventVersion attribute 'patch' cannot be negative, was '%d'".formatted(patch));
         }
     }
 
-    public static EventVersion of(int major) {
-        return new EventVersion(major, 0, 0);
+    public EventVersion(int major) {
+        this(major, 0, 0);
     }
 
-    public static EventVersion of(int major, int minor) {
-        return new EventVersion(major, minor, 0);
-    }
-
-    public static EventVersion of(int major, int minor, int patch) {
-        return new EventVersion(major, minor, patch);
-    }
-
-    public static EventVersion of(String version) {
-        if (version == null || version.isEmpty()) {
-            throw new IllegalArgumentException("Version cannot be null or empty");
-        }
-
-        String[] versions = version.split("\\.");
-        if (versions.length != 3) {
-            throw new IllegalArgumentException("Invalid version format. A version should be in the numerical format of 'MAJOR.MINOR.PATCH'");
-        }
-
-        try {
-            return new EventVersion(
-                    Integer.parseInt(versions[0]),
-                    Integer.parseInt(versions[1]),
-                    Integer.parseInt(versions[2])
-            );
-        } catch (NumberFormatException numberFormatException) {
-            throw new IllegalArgumentException("Version contains non-numeric characters");
-        }
+    public EventVersion(int major, int minor) {
+        this(major, minor, 0);
     }
 
     @Override

@@ -13,36 +13,6 @@ public record EventRouting(
         }
     }
 
-    public EventRouting(Builder builder) {
-        this(builder.eventType, builder.eventDispatchType);
-    }
-
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public static class Builder {
-
-        private EventType eventType;
-        private EventDispatchType eventDispatchType;
-
-        private Builder() {}
-
-        public Builder withEventType(EventType eventType) {
-            this.eventType = eventType;
-            return this;
-        }
-
-        public Builder withEventDispatchType(EventDispatchType eventDispatchType) {
-            this.eventDispatchType = eventDispatchType;
-            return this;
-        }
-
-        public EventRouting build() {
-            return new EventRouting(this);
-        }
-    }
-
     @Override
     public String toString() {
         return "EventRouting{" +

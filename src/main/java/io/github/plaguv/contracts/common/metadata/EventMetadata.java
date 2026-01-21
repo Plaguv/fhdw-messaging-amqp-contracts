@@ -24,46 +24,13 @@ public record EventMetadata(
         }
     }
 
-    public EventMetadata(Builder builder) {
-        this(builder.eventId, builder.eventVersion, builder.occurredAt, builder.producer);
-    }
-
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public static class Builder {
-
-        private UUID eventId = UUID.randomUUID();
-        private EventVersion eventVersion;
-        private Instant occurredAt = Instant.now();
-        private Class<?> producer;
-
-        private Builder() {}
-
-        public Builder withEventId(UUID eventId) {
-            this.eventId = eventId;
-            return this;
-        }
-
-        public Builder withEventVersion(EventVersion eventVersion) {
-            this.eventVersion = eventVersion;
-            return this;
-        }
-
-        public Builder withOccurredAt(Instant occurredAt) {
-            this.occurredAt = occurredAt;
-            return this;
-        }
-
-        public Builder withProducer(Class<?> producer) {
-            this.producer = producer;
-            return this;
-        }
-
-        public EventMetadata build() {
-            return new EventMetadata(this);
-        }
+    public EventMetadata(EventVersion eventVersion, Class<?> producer) {
+        this(
+                UUID.randomUUID(),
+                eventVersion,
+                Instant.now(),
+                producer
+        );
     }
 
     @Override
