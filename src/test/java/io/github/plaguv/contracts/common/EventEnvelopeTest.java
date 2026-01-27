@@ -14,21 +14,21 @@ import org.junit.jupiter.api.Test;
 
 class EventEnvelopeTest {
 
-    private EventMetadata eventMetadata;
-    private EventRouting eventRouting;
-    private EventInstance eventInstance;
+    private EventMetadata metadata;
+    private EventRouting routing;
+    private EventInstance payload;
 
     @BeforeEach
     void beforeEach() {
-        eventMetadata = new EventMetadata(
+        metadata = new EventMetadata(
                 new EventVersion(1),
                 EventEnvelopeTest.class
         );
-        eventRouting = new EventRouting(
+        routing = new EventRouting(
                 EventType.STORE_OPENED,
                 EventDispatchType.DIRECT
         );
-        eventInstance = new StoreClosedEvent(5L);
+        payload = new StoreOpenedEvent(5L);
     }
 
     @Test
@@ -37,24 +37,65 @@ class EventEnvelopeTest {
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> new EventEnvelope(null, null, null));
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new EventEnvelope(eventMetadata, eventRouting, null));
+                () -> new EventEnvelope(metadata, routing, null));
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new EventEnvelope(eventMetadata, null, eventInstance));
+                () -> new EventEnvelope(metadata, null, payload));
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new EventEnvelope(null, eventRouting, eventInstance));
+                () -> new EventEnvelope(null, routing, payload));
     }
 
     @Test
     @DisplayName("Should throw if class mismatch is present")
     void throwsOnClassMismatch() {
+        payload = new StoreClosedEvent(5L);
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new EventEnvelope(eventMetadata, eventRouting, eventInstance));
+                () -> new EventEnvelope(metadata, routing, payload));
     }
 
     @Test
     @DisplayName("Should construct if classes match")
     void constructsOnClassMatch() {
         Assertions.assertDoesNotThrow(
-                () -> new EventEnvelope(eventMetadata, eventRouting, new StoreOpenedEvent(5L)));
+                () -> new EventEnvelope(metadata, routing, new StoreOpenedEvent(5L)));
+    }
+
+    @Test
+    @DisplayName("Should throw if null parameter in builder")
+    void builderThrowsOnNull() {
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> EventEnvelope.builder()
+                        .build());
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> EventEnvelope.builder()
+                        .ofMetadata(metadata)
+                        .ofRouting(routing)
+                        .ofMetadata(null)
+                        .build());
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> EventEnvelope.builder()
+                        .ofMetadata(metadata)
+                        .ofRouting(null)
+                        .ofMetadata(metadata)
+                        .build());
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> EventEnvelope.builder()
+                        .ofMetadata(null)
+                        .ofRouting(routing)
+                        .ofMetadata(metadata)
+                        .build());
+    }
+
+    @Test
+    @DisplayName("Builder should keep given values")
+    void builderConstructsWithGivenValues() {
+        EventEnvelope eventEnvelope = EventEnvelope.builder()
+                    .ofMetadata(metadata)
+                    .ofRouting(routing)
+                    .ofPayload(payload)
+                    .build();
+
+        Assertions.assertEquals(metadata, eventEnvelope.metadata());
+        Assertions.assertEquals(routing, eventEnvelope.routing());
+        Assertions.assertEquals(payload, eventEnvelope.payload());
     }
 }
