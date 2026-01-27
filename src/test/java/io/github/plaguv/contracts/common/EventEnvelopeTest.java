@@ -98,4 +98,40 @@ class EventEnvelopeTest {
         Assertions.assertEquals(routing, eventEnvelope.routing());
         Assertions.assertEquals(payload, eventEnvelope.payload());
     }
+
+    @Test
+    @DisplayName("Builder should construct with only method parameters")
+    void builderConstructsWithMethodParametersOnly() {
+        Assertions.assertDoesNotThrow(() ->
+                EventEnvelope.builder()
+                        .withEventVersion(new EventVersion(1))
+                        .withProducer(EventEnvelopeTest.class)
+                        .withEventType(EventType.STORE_OPENED)
+                        .withEventDispatchType(EventDispatchType.DIRECT)
+                        .ofPayload(payload)
+                        .build());
+    }
+
+    @Test
+    @DisplayName("Builder should construct with minimal parameters")
+    void builderConstructsWithMinimalValues() {
+        metadata = new EventMetadata(
+                new EventVersion(1),
+                EventEnvelopeTest.class
+        );
+        Assertions.assertDoesNotThrow(() ->
+                EventEnvelope.builder()
+                        .ofMetadata(metadata)
+                        .ofRouting(routing)
+                        .ofPayload(payload)
+                        .build());
+
+        Assertions.assertDoesNotThrow(() ->
+                EventEnvelope.builder()
+                        .withEventVersion(new EventVersion(1))
+                        .withProducer(EventEnvelopeTest.class)
+                        .ofRouting(routing)
+                        .ofPayload(payload)
+                        .build());
+    }
 }
